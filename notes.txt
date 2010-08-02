@@ -1,0 +1,80 @@
+Rose City Triathlon
+Tyler, TX
+
+distances:
+- swim 650 meters
+- bike 14.5 miles
+- run 5 kilometers
+
+goals:
+- swim under 13'
+- bike 20 mph
+- run under 20'
+
+splits?
+total time?
+
+# prototype DSL
+
+triathlon "Rose City Triathlon"
+location "Tyler, TX"
+
+distance :swim, 650, :meters
+distance :bike, 14.5, :miles
+distance :run, 5, :kilometers
+
+goal :run, :under, 20, :minutes
+goal :bike, 20, :mph
+goal :swim, :under, 13, :minutes
+goal :finish, :under, "1:15"
+
+splits.generate do |split_name, split_time|
+	puts "Split goal: #{split_name} in #{split_time}."
+end
+
+puts "Here is the run #{run}"
+
+puts "Finish in #{total_time}."
+
+# another example
+
+triathlon = Triathlon.race do |t|
+	t.location "Tyler, TX"
+	t.distance :run, 5, :k
+	t.goal :finish, 20, :min
+end
+
+puts "In order to finish the run in #{triathlon.run_time}, I need to run a #{triathlon.run_pace} pace."
+
+def test_should_return_a_new_triathlon do
+	triathlon = Triathlon.race {|t|}
+	assert triathlon
+end
+
+def test_should_know_about_the_run do
+	distance :run, 5, :k
+	assert run.distance.length == 5
+	assert run.distance.unit == :kilometer
+	assert run.pace "6:00", :mpm == 18.5
+	assert run.pace "7:00", :seconds == (21*60+42)
+end
+
+def test_should_compute_a_finish_time do
+	distance :swim, 100, :meters
+	distance :bike, 10, :miles
+	distance :run, 1, :mile
+
+	goal :swim, :under, 2, :minutes
+	goal :bike, 20, :mph
+	goal :run, :under, 7, :minutes
+	
+	assert finish_time.to_s == "39:00"
+	assert finish_time.in_seconds == 2340
+end
+
+# example of usage
+- Run 10 miles
+- Pace from 7:23 - 8:23
+
+time = run 10, :miles, "7:53"
+puts "Run will take an average of #{time}." # ~119'
