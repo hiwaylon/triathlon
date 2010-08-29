@@ -14,6 +14,7 @@ class SplitPresenter
     seconds = (@total_seconds - (minutes * 60.0)).round
     return "#{minutes}:#{seconds}"
   end
+  
 end
 
 class Splits
@@ -29,15 +30,19 @@ class Splits
     end
   end
   
-  def getFourHundred()
+  def get_four_hundred()
     return SplitPresenter.new(@total_pace_in_seconds / 4.0)
   end
 
-  def getEightHundred()
+  def get_eight_hundred()
     return SplitPresenter.new(@total_pace_in_seconds / 2.0)
   end
 
-  def getOneHundred()
+  def get_one_hundred()
     return SplitPresenter.new(@total_pace_in_seconds / 16.0)
+  end
+
+  def pace
+    return SplitPresenter.new(@total_pace_in_seconds)
   end
 end
