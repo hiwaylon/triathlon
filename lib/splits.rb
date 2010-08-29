@@ -10,7 +10,7 @@ class SplitPresenter
       return 'NYI'
     end
 
-    minutes = (@total_seconds / 60.0).round
+    minutes = (@total_seconds / 60.0).truncate
     seconds = (@total_seconds - (minutes * 60.0)).round
     return "#{minutes}:#{seconds}"
   end
