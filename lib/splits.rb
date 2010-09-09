@@ -12,7 +12,9 @@ class SplitPresenter
 
     minutes = (@total_seconds / 60.0).truncate
     seconds = (@total_seconds - (minutes * 60.0)).round
-    return "#{minutes}:#{seconds}"
+    seconds_string = seconds.to_s
+    seconds_string = "0#{seconds_string}" if seconds < 10.0
+    return "#{minutes}:#{seconds_string}"
   end
   
 end

@@ -1,27 +1,36 @@
 require 'converter'
 
-class Bike
-  def initialize
-    @converter = Converter.new
+class TimePresenter
+  def self.present_hours_as_string(time)
+    hours = time.floor
+    fraction = time - hours
+    minutes = (60.0 * fraction)
+    minutes_string = minutes.floor.to_s
+    minutes_string = "0#{minutes_string}" if minutes < 10.0
+    fraction = minutes - minutes.floor
+    seconds = (60.0 * fraction)
+    seconds_string = seconds.round.to_s
+    seconds_string = "0#{seconds_string}" if seconds < 10.0
+    "#{hours}:#{minutes_string}:#{seconds_string}"
   end
-  def compute_speed(distance, time, *options)
-    # todo - could construct with the time unit and thus hold a conversion strategy
-    time_in_seconds = time
-    unless options.empty?
-      options_hash = options[0]
-      if options_hash[:time_unit] == :hours
-        time_in_seconds = @converter.hours_to_seconds time
-      elsif options_hash[:time_unit] == :minutes
-        time_in_seconds = @converter.minutes_to_seconds time
-      end
-    end
-    
-    speed_in_miles_per_second = distance / time_in_seconds
-    @converter.mps_to_mph speed_in_miles_per_second
+end
+
+class Bike
+  attr_accessor :distance, :speed
+
+  def initialize(distance, speed)
+    self.distance = distance.to_f
+    self.speed = speed.to_f
+  end
+
+  def compute_time 
+    time = distance / speed # time in hours
+    TimePresenter.present_hours_as_string(time)
   end
   
-  def compute_time(distance, speed)
-    distance * (60.0 / speed) # assume speed in mph, convert to mpm
+  def to_s
+    p distance
+    p speed
   end
 end
 

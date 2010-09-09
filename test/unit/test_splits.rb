@@ -30,4 +30,9 @@ class TestSplits < Test::Unit::TestCase
     splits = Splits.new("7:15")
     assert_equal splits.pace.to_s, "7:15"
   end
+  
+  should 'present time with seconds less than ten correctly' do
+    splits = Splits.new("6:16")
+    assert_equal splits.get_eight_hundred.to_s, "3:08"
+  end
 end

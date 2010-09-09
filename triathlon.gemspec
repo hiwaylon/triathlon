@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = %q{triathlon}
-  spec.version = "0.0.4"
+  spec.version = "0.0.7"
   
   spec.authors = ["Waylon Calabrese"]
   spec.summary = %q{Compute interesting stats and get faster.}
