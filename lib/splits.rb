@@ -13,25 +13,11 @@ class Splits
       @total_pace_in_seconds = pace_times[0]
     end
   end
-  
   def split(meters)
     ratio = meters.to_f / 1600.0
-    split = @pace * ratio
+    split = @total_pace_in_seconds * ratio
     present_seconds_as_string split
   end
-
-  def get_four_hundred()
-    present_seconds_as_string @total_pace_in_seconds / 4.0
-  end
-
-  def get_eight_hundred()
-    present_seconds_as_string @total_pace_in_seconds /  2.0
-  end
-
-  def get_one_hundred()
-    present_seconds_as_string @total_pace_in_seconds / 16.0
-  end
-
   def pace
     present_seconds_as_string @total_pace_in_seconds
   end
