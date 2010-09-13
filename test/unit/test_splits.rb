@@ -3,15 +3,10 @@ require 'test_helper'
 require 'splits'
 
 class TestSplits < Test::Unit::TestCase
-  should 'return split as a string' do
-    split = SplitPresenter.new(430)
-    assert_equal split.to_s, "7:10"
-  end
-
   should 'compute 400m pace' do
     splits = Splits.new("10:00")
-    four_hundred = splits.get_four_hundred
-    assert_equal four_hundred.to_s, "2:30"
+    four_hundred = splits.split 400
+    assert_equal four_hundred, "2:30"
   end
  
   should 'compute 800m pace' do

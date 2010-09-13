@@ -13,12 +13,8 @@ class TestBike < Test::Unit::TestCase
     bike = Bike.new(distance, speed)
     assert_in_delta(distance, bike.distance, 0.001)
     assert_in_delta(speed, bike.speed, 0.001)
-    
-    puts bike
-
     time = bike.compute_time
     expected_time = "1:04:42"
-    p time
     assert_equal(expected_time, time)
   end
 end

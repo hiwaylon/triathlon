@@ -1,25 +1,7 @@
 require 'converter'
-
-class SplitPresenter
-  def initialize(seconds)
-    @total_seconds = seconds.to_f
-  end
-  
-  def to_s
-    if @total_seconds > 3600.0
-      return 'NYI'
-    end
-
-    minutes = (@total_seconds / 60.0).truncate
-    seconds = (@total_seconds - (minutes * 60.0)).round
-    seconds_string = seconds.to_s
-    seconds_string = "0#{seconds_string}" if seconds < 10.0
-    return "#{minutes}:#{seconds_string}"
-  end
-  
-end
-
+require 'time_presenter'
 class Splits
+  include TimePresenter
   def initialize(pace)
     pace_times = pace.split(':').map{|string| string.to_i}
     converter = Converter.new
@@ -32,19 +14,25 @@ class Splits
     end
   end
   
+  def split(meters)
+    ratio = meters.to_f / 1600.0
+    split = @pace * ratio
+    present_seconds_as_string split
+  end
+
   def get_four_hundred()
-    return SplitPresenter.new(@total_pace_in_seconds / 4.0)
+    present_seconds_as_string @total_pace_in_seconds / 4.0
   end
 
   def get_eight_hundred()
-    return SplitPresenter.new(@total_pace_in_seconds / 2.0)
+    present_seconds_as_string @total_pace_in_seconds /  2.0
   end
 
   def get_one_hundred()
-    return SplitPresenter.new(@total_pace_in_seconds / 16.0)
+    present_seconds_as_string @total_pace_in_seconds / 16.0
   end
 
   def pace
-    return SplitPresenter.new(@total_pace_in_seconds)
+    present_seconds_as_string @total_pace_in_seconds
   end
 end

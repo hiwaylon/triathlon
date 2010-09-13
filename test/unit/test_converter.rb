@@ -22,4 +22,14 @@ class TestConverter < Test::Unit::TestCase
     expected_mph = 24.5
     assert_in_delta(expected_mph, mph, 0.001)
   end
+  
+  should 'convert a time string to seconds' do
+    converter = Converter.new
+    seconds = converter.string_to_seconds "1:45"
+    expected_seconds = 105
+    assert expected_seconds == seconds
+    seconds = converter.string_to_seconds "5:44"
+    expected_seconds = 344
+    assert expected_seconds == seconds
+  end
 end
