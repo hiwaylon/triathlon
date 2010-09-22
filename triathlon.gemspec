@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = %q{triathlon}
-  spec.version = "0.0.9"
+  spec.version = "0.0.11"
   
   spec.authors = ["Waylon Calabrese"]
   spec.summary = %q{Compute interesting stats and get faster.}
@@ -13,8 +13,9 @@ Gem::Specification.new do |spec|
                 "lib/bike.rb", 
                 "lib/converter.rb", 
                 "lib/splits.rb",
-                "lib/splits.rb",
-                "test/test_helper.rb", 
+                "lib/time_presenter.rb",
+                "lib/swim.rb",
+		"test/test_helper.rb", 
                 "test/unit/test_bike.rb", 
                 "test/unit/test_converter.rb", 
                 "test/unit/test_splits.rb"]
